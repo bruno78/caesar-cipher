@@ -32,10 +32,10 @@ end
 
 def decipher(string)
 
-=begin
+
   common_words = %w{i you he she it we they is are there their to in on at will was were you're we're i'm
 the're meet come it's o'clock clock watch see take push pick pickup up down side beside be time please time so just going gone place home house hello cat dog bye goodbye buy good bad yes no not don't din't wont my name mine your man men woman women if else more less just years year old kid boy girl day night monday tuesday wednesday thursday friday saturday sunday january february march april may june july august september october november december could should would live die leave }
-=end
+
 
   word_set = string.split(' ')
   offset = 0
