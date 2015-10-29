@@ -1,5 +1,5 @@
 # Caesar-cipher v. 1.0
-# Decipher version v. 2.0 using linux word dictionary
+# Decipher version v. 2.1 using linux word dictionary
 
 def caesar_cipher(string, offset)
   alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
@@ -46,13 +46,13 @@ the're meet come it's o'clock clock watch see take push pick pickup up down side
     while offset < 26
       cipher = caesar_cipher(word, offset)
 
-      if word_set.length == 1 && check_for_words(cipher)
+      if word_set.length == 1 && (common_words.include?(cipher) || check_for_words(cipher))
         condition = false
         break
       elsif word_set.length > 1
         word2 = word_set[idx+1]
         cipher2 = caesar_cipher(word2, offset)
-        if check_for_words(cipher) && check_for_words(cipher2)
+        if common_words.include?(cipher) || (check_for_words(cipher) && check_for_words(cipher2))
           condition = false
           break
         end
