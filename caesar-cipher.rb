@@ -1,4 +1,5 @@
 # Caesar-cipher v. 1.0
+# Decipher version v. 2.0 using linux word dictionary
 
 def caesar_cipher(string, offset)
   alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
@@ -19,12 +20,23 @@ def caesar_cipher(string, offset)
   cipher
 end
 
-puts caesar_cipher("my name is bruno", 5)
+def check_for_words(word)
+  words = {}
+  File.open("/usr/share/dict/words") do |file|
+    file.each do |line|
+      words[line.strip] = true
+    end
+  end
+  words.has_key?(word)
+end
+
 
 def decipher(string)
 
+=begin
   common_words = %w{i you he she it we they is are there their to in on at will was were you're we're i'm
 the're meet come it's o'clock clock watch see take push pick pickup up down side beside be time please time so just going gone place home house hello cat dog bye goodbye buy good bad yes no not don't din't wont my name mine your man men woman women kid boy girl day night monday tuesday wednesday thursday friday saturday sunday january february march april may june july august september october november december could should would live die leave }
+=end
 
   word_set = string.split(' ')
   offset = 0
@@ -33,7 +45,8 @@ the're meet come it's o'clock clock watch see take push pick pickup up down side
   while condition
     word = word_set[idx]
     while offset < 26
-      if common_words.include?(caesar_cipher(word, offset))
+      cipher = caesar_cipher(word, offset)
+      if check_for_words(cipher)
         condition = false
         break
       end
@@ -44,5 +57,6 @@ the're meet come it's o'clock clock watch see take push pick pickup up down side
   caesar_cipher(string, offset)
 end
 
-puts decipher("khoor")
-puts decipher("rd sfrj nx gwzst")
+puts caesar_cipher("my name is bruno", 5) == "rd sfrj nx gwzst"
+puts decipher("khoor") == "hello"
+puts decipher("rd sfrj nx gwzst") = "my name is bruno"
