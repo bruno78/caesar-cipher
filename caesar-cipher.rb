@@ -30,12 +30,11 @@ def check_for_words(word)
   words.has_key?(word)
 end
 
-
 def decipher(string)
 
 =begin
   common_words = %w{i you he she it we they is are there their to in on at will was were you're we're i'm
-the're meet come it's o'clock clock watch see take push pick pickup up down side beside be time please time so just going gone place home house hello cat dog bye goodbye buy good bad yes no not don't din't wont my name mine your man men woman women kid boy girl day night monday tuesday wednesday thursday friday saturday sunday january february march april may june july august september october november december could should would live die leave }
+the're meet come it's o'clock clock watch see take push pick pickup up down side beside be time please time so just going gone place home house hello cat dog bye goodbye buy good bad yes no not don't din't wont my name mine your man men woman women if else more less just years year old kid boy girl day night monday tuesday wednesday thursday friday saturday sunday january february march april may june july august september october november december could should would live die leave }
 =end
 
   word_set = string.split(' ')
@@ -46,9 +45,17 @@ the're meet come it's o'clock clock watch see take push pick pickup up down side
     word = word_set[idx]
     while offset < 26
       cipher = caesar_cipher(word, offset)
-      if check_for_words(cipher)
+
+      if word_set.length == 1 && check_for_words(cipher)
         condition = false
         break
+      elsif word_set.length > 1
+        word2 = word_set[idx+1]
+        cipher2 = caesar_cipher(word2, offset)
+        if check_for_words(cipher) && check_for_words(cipher2)
+          condition = false
+          break
+        end
       end
       offset += 1
     end
@@ -59,4 +66,4 @@ end
 
 puts caesar_cipher("my name is bruno", 5) == "rd sfrj nx gwzst"
 puts decipher("khoor") == "hello"
-puts decipher("rd sfrj nx gwzst") = "my name is bruno"
+puts decipher("rd sfrj nx gwzst") == "my name is bruno"
